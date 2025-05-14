@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "postinstall": "prisma generate",
     "devstart": "nodemon script.ts",
     "dev": "next dev --turbopack",
     "build": "next build",
