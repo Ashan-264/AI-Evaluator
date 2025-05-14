@@ -23,7 +23,7 @@ export async function POST(request: Request) {
           content: `output of llm being tested: ${output}, expected output: ${expectedOutput}`,
         },
       ],
-      model: "llama-3.1-70b-versatile",
+      model: "llama-3.3-70b-versatile",
     });
 
     //console.log(chatCompletion.choices[0].message.content);

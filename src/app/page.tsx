@@ -112,7 +112,7 @@ const HomePage: React.FC = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              llm: "llama-3.1-70b-versatile",
+              llm: "llama-3.3-70b-versatile",
               message: testCase.input,
               prompt: testCase.systemPrompt,
             }),
@@ -177,7 +177,7 @@ const HomePage: React.FC = () => {
 
           const newResult: Result = {
             name: "eval",
-            llm: "llama-3.1-70b-versatile",
+            llm: "llama-3.3-70b-versatile",
             input: testCase.input,
             output: data.message,
             expected: testCase.expectedOutput,
@@ -209,7 +209,7 @@ const HomePage: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          llm: "llama-3.1-70b-versatile",
+          llm: "llama-3.3-70b-versatile",
           message: prompt,
           prompt: "Answer Question",
         }),

@@ -23,12 +23,19 @@ export async function POST(request: Request) {
           content: `create 10 test cases of ${testType} `,
         },
       ],
-      model: "llama-3.1-70b-versatile",
+      model: "llama-3.3-70b-versatile",
       response_format: { type: "json_object" },
     });
 
     const llmresponse = chatCompletion.choices[0].message.content;
 
+    if (!llmresponse) {
+      console.error("Error: llmresponse is null or undefined");
+      return NextResponse.json(
+        { success: false, error: "Invalid response from LLM" },
+        { status: 500 }
+      );
+    }
     const cleanedResponse = llmresponse.replace(/```/g, "").trim();
     let testCases;
     try {
