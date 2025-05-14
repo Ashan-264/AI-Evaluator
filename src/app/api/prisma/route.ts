@@ -46,7 +46,8 @@ export async function POST(request: Request) {
     // Ensure the error response is always an object
     const errorMessage = {
       code: "ERR_INVALID_ARG_TYPE",
-      message: error.message || "An unknown error occurred", // Add a message for clarity
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred", // Add a message for clarity
     };
     return NextResponse.json(errorMessage, { status: 500 }); // Return the error message as JSON
   }
@@ -73,7 +74,7 @@ async function create(body: CreateLLMBody) {
         expectedOutput: `${expectedOutput}`, // Add the required field
         cosineSimilarity: cosineSimilar,
         exactMatch: match,
-        duration: duration ? Math.round(parseFloat(duration)) : "0",
+        duration: duration ? Math.round(parseFloat(duration)) : 0,
         successfull: true,
         // userId: your_user_id_value, // Include userId if required by your schema
       },
