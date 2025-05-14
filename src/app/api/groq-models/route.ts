@@ -14,10 +14,12 @@ interface Model {
 export async function GET() {
   try {
     const response = await client.models.list();
-    const models: Model[] = response.data.map((model: any) => ({
-      id: model.id,
-      owned_by: model.owned_by,
-    }));
+    const models: Model[] = response.data.map(
+      (model: { id: string; owned_by: string }) => ({
+        id: model.id,
+        owned_by: model.owned_by,
+      })
+    );
     console.log(models);
     return NextResponse.json({ models: models });
   } catch (error) {

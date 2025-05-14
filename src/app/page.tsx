@@ -1,11 +1,11 @@
 "use client";
-import test from "node:test";
+//import test from "node:test";
 import React, { useState } from "react";
 
 const HomePage: React.FC = () => {
   const [selectedLLM, setSelectedLLM] = useState<string | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
-  const [selectedCriteria, setSelectedCriteria] = useState<string | null>(null);
+  //const [selectedCriteria, setSelectedCriteria] = useState<string | null>(null);
   const [prompt, setPrompt] = useState<string>("");
   const [testPrompt, setTestPrompt] = useState<string>("");
   const [testCases, setTestCases] = useState<
@@ -16,76 +16,76 @@ const HomePage: React.FC = () => {
     [{ model: "none", owner: "none" }]
   );
   const [selectedOwner, setSelectedOwner] = useState<string | null>(null);
-  const buttonStyle = {
-    padding: "10px 20px",
-    borderRadius: "5px",
-    background: "rgba(255, 255, 255, 0.2)",
-    border: "1px solid white",
-    color: "white",
-    cursor: "pointer",
-  };
-  const [results, setResults] = useState([
-    {
-      key: 1,
-      name: "eval",
-      llm: "GPT-3",
-      input: "Luke...",
-      output: "Star Wars",
-      expected: "Star Wars: A New Hope",
-      exactMatch: "0.00%",
-      duration: "0.7s",
-    },
-    {
-      key: 2,
-      name: "eval",
-      llm: "GPT-3",
-      input: "An orphan...",
-      output: "Harry Potter",
-      expected: "Harry Potter: Philosopher's Stone",
-      exactMatch: "0.00%",
-      duration: "1.3s",
-    },
-    {
-      key: 3,
-      name: "eval",
-      llm: "Claude",
-      input: "The life story...",
-      output: "Forrest Gump",
-      expected: "Forrest Gump",
-      exactMatch: "100.00%",
-      duration: "2.1s",
-    },
-    {
-      key: 4,
-      name: "eval",
-      llm: "Claude",
-      input: "A young lion...",
-      output: "The Lion King",
-      expected: "The Lion King",
-      exactMatch: "100.00%",
-      duration: "0.8s",
-    },
-    {
-      key: 5,
-      name: "eval",
-      llm: "Bard",
-      input: "An office...",
-      output: "Fight Club",
-      expected: "Fight Club",
-      exactMatch: "100.00%",
-      duration: "2.1s",
-    },
-    {
-      key: 6,
-      name: "eval",
-      llm: "Bard",
-      input: "A young FBI...",
-      output: "The Silence...",
-      expected: "The Silence of the Lambs",
-      exactMatch: "100.00%",
-      duration: "0.9s",
-    },
-  ]);
+  // const buttonStyle = {
+  //   padding: "10px 20px",
+  //   borderRadius: "5px",
+  //   background: "rgba(255, 255, 255, 0.2)",
+  //   border: "1px solid white",
+  //   color: "white",
+  //   cursor: "pointer",
+  // };
+  //const [results, setResults] = useState([
+  //   {
+  //     key: 1,
+  //     name: "eval",
+  //     llm: "GPT-3",
+  //     input: "Luke...",
+  //     output: "Star Wars",
+  //     expected: "Star Wars: A New Hope",
+  //     exactMatch: "0.00%",
+  //     duration: "0.7s",
+  //   },
+  //   {
+  //     key: 2,
+  //     name: "eval",
+  //     llm: "GPT-3",
+  //     input: "An orphan...",
+  //     output: "Harry Potter",
+  //     expected: "Harry Potter: Philosopher's Stone",
+  //     exactMatch: "0.00%",
+  //     duration: "1.3s",
+  //   },
+  //   {
+  //     key: 3,
+  //     name: "eval",
+  //     llm: "Claude",
+  //     input: "The life story...",
+  //     output: "Forrest Gump",
+  //     expected: "Forrest Gump",
+  //     exactMatch: "100.00%",
+  //     duration: "2.1s",
+  //   },
+  //   {
+  //     key: 4,
+  //     name: "eval",
+  //     llm: "Claude",
+  //     input: "A young lion...",
+  //     output: "The Lion King",
+  //     expected: "The Lion King",
+  //     exactMatch: "100.00%",
+  //     duration: "0.8s",
+  //   },
+  //   {
+  //     key: 5,
+  //     name: "eval",
+  //     llm: "Bard",
+  //     input: "An office...",
+  //     output: "Fight Club",
+  //     expected: "Fight Club",
+  //     exactMatch: "100.00%",
+  //     duration: "2.1s",
+  //   },
+  //   {
+  //     key: 6,
+  //     name: "eval",
+  //     llm: "Bard",
+  //     input: "A young FBI...",
+  //     output: "The Silence...",
+  //     expected: "The Silence of the Lambs",
+  //     exactMatch: "100.00%",
+  //     duration: "0.9s",
+  //   },
+  // ]);
   const [response, setResponse] = useState<string>("");
   const [loading, setLoading] = useState(false);
   interface Result {
@@ -127,7 +127,7 @@ const HomePage: React.FC = () => {
           const data = await response.json();
 
           console.log("duration ", duration);
-          const output = data.message;
+          //const output = data.message;
           // if (data.message) {
           //   setResponse(data.message);
           // }
@@ -252,7 +252,18 @@ const HomePage: React.FC = () => {
       const data = await response.json();
       console.log("all records", data.records);
       setTestResults([]);
-      data.records.forEach((record) => {
+      interface Record {
+        id: number;
+        llm: string;
+        input: string;
+        output: string;
+        expectedOutput: string;
+        cosineSimilarity: string;
+        exactMatch: string;
+        duration: number;
+      }
+
+      data.records.forEach((record: Record) => {
         const newResult: Result = {
           key: record.id,
           name: "eval",
@@ -265,7 +276,7 @@ const HomePage: React.FC = () => {
           duration: record.duration,
         };
 
-        setTestResults((prevResults) => [...prevResults, newResult]);
+        setTestResults((prevResults: Result[]) => [...prevResults, newResult]);
       });
     } catch (error) {
       console.log("error", error);
@@ -289,7 +300,17 @@ const HomePage: React.FC = () => {
       }
       const data = await response.json();
 
-      const modalData = data.models.map((model) => ({
+      interface Model {
+        id: string;
+        owned_by: string;
+      }
+
+      interface ModalData {
+        model: string;
+        owner: string;
+      }
+
+      const modalData: ModalData[] = data.models.map((model: Model) => ({
         model: model.id,
         owner: model.owned_by,
       }));
@@ -324,15 +345,35 @@ const HomePage: React.FC = () => {
       const data = await response.json();
       console.log("data", data);
 
-      const extractedTestCases = data.testCases.testCases.map((testCase) => ({
+      interface ExtractedTestCase {
+        input: string;
+        expectedOutput: string;
+        systemPrompt: string;
+      }
+
+      interface TestCasesResponse {
+        testCases: {
+          testCases: Array<ExtractedTestCase>;
+        };
+      }
+
+      const extractedTestCases = (
+        data as TestCasesResponse
+      ).testCases.testCases.map((testCase: ExtractedTestCase) => ({
         input: testCase.input,
         expectedOutput: testCase.expectedOutput,
         systemPrompt: testCase.systemPrompt,
       }));
 
-      extractedTestCases.map((extractedTestCase) => {
-        console.log("output expected", extractedTestCase.expectedOutput);
-      });
+      extractedTestCases.map(
+        (extractedTestCase: {
+          input: string;
+          expectedOutput: string;
+          systemPrompt: string;
+        }) => {
+          console.log("output expected", extractedTestCase.expectedOutput);
+        }
+      );
 
       // if (data.testCases) {
       //   setResponse(JSON.stringify(extractedTestCases));
@@ -345,9 +386,6 @@ const HomePage: React.FC = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      if (!data.success) {
-        throw new Error(data.error || "Failed to receive response from llm");
-      }
     } finally {
       setLoading(false);
     }
@@ -365,6 +403,7 @@ const HomePage: React.FC = () => {
           action: "deleteAll",
         }),
       });
+      console.log("response", response);
 
       setTestResults([]);
     } catch (error) {
