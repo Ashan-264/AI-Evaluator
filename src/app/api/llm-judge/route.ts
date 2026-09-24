@@ -23,7 +23,7 @@ export async function POST(request: Request) {
           content: `output of llm being tested: ${output}, expected output: ${expectedOutput}`,
         },
       ],
-      model: "llama-3.3-70b-versatile",
+      model: "openai/gpt-oss-120b",
     });
 
     //console.log(chatCompletion.choices[0].message.content);

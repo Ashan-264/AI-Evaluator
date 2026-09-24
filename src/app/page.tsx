@@ -112,7 +112,7 @@ const HomePage: React.FC = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              llm: selectedLLM ?? "llama-3.3-70b-versatile",
+              llm: selectedLLM ?? "openai/gpt-oss-120b",
               message: testCase.input,
               prompt: testCase.systemPrompt,
             }),
@@ -177,7 +177,7 @@ const HomePage: React.FC = () => {
 
           const newResult: Result = {
             name: "eval",
-            llm: selectedLLM ?? "llama-3.3-70b-versatile",
+            llm: selectedLLM ?? "openai/gpt-oss-120b",
             input: testCase.input,
             output: data.message,
             expected: testCase.expectedOutput,
